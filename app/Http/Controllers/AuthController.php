@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
-    // Đăng ký
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -45,7 +45,7 @@ class AuthController extends Controller
         return redirect()->back()->with('success', 'Đăng ký thành công!');
     }
 
-    // Đăng nhập
+
 public function login(Request $request)
 {
     $validator = Validator::make($request->all(), [
@@ -68,7 +68,7 @@ public function login(Request $request)
 
     Auth::login($user);
 
-    // ✅ Lưu store_name vào session
+
     Session::put('store_name', $user->store_name);
 
     return redirect('/');
@@ -76,7 +76,7 @@ public function login(Request $request)
 
 
 
-    // Gửi mã OTP khi quên mật khẩu
+
    public function sendOtp(Request $request)
 {
     $login = trim($request->input('login'));
@@ -86,7 +86,7 @@ public function login(Request $request)
         return redirect()->back()->with('error', 'Người dùng không tồn tại');
     }
 
-    // Cooldown
+
     $lastOtp = OtpRequest::where('user_id', $user->id)
         ->where('created_at', '>=', Carbon::now()->subSeconds(60))
         ->latest()
@@ -106,14 +106,14 @@ public function login(Request $request)
         'is_used' => false
     ]);
 
-    // Gửi email nếu có
+
     if ($user->email) {
         Mail::raw("Xin chào {$user->store_name},\n\nMã OTP của bạn là: {$otp}\nThời hạn: 3 phút\n\nĐừng chia sẻ mã này với bất kỳ ai.", function ($message) use ($user) {
             $message->to($user->email)->subject('Mã OTP xác nhận đổi mật khẩu');
         });
     }
 
-    // Ghi session
+
     Session::put('otp_user_id', $user->id);
     Session::put('latest_otp', $otp);
 
@@ -124,7 +124,7 @@ public function login(Request $request)
 }
 
 
-    // Gửi lại mã OTP
+
     public function resendOtp(Request $request)
 {
     $user_id = Session::get('otp_user_id');
@@ -158,7 +158,7 @@ public function login(Request $request)
         'is_used' => false
     ]);
 
-    // Gửi email nếu có
+
     if ($user->email) {
         Mail::raw("Xin chào {$user->store_name},\n\nMã OTP mới của bạn là: {$otp}\nThời hạn: 3 phút\n\nĐừng chia sẻ mã này với bất kỳ ai.", function ($message) use ($user) {
             $message->to($user->email)->subject('Mã OTP mới - Đổi mật khẩu');
@@ -171,7 +171,7 @@ public function login(Request $request)
 }
 
 
-    // Xác thực OTP
+
     public function verifyOtp(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -198,10 +198,10 @@ public function login(Request $request)
             return redirect()->back()->with('error', 'Mã OTP không hợp lệ hoặc đã hết hạn');
         }
 
-        // Đánh dấu OTP đã dùng
+
         $otpRecord->update(['is_used' => true]);
 
-        // Lưu session
+
         Session::put('otp_verified', true);
         Session::put('otp_user_id', $user_id);
 
@@ -211,7 +211,7 @@ public function login(Request $request)
 
     }
 
-    // Đổi mật khẩu mới
+
     public function resetPassword(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -226,7 +226,7 @@ public function login(Request $request)
         $user_id = $request->user_id;
         $session_user_id = Session::get('otp_user_id');
 
-        // Kiểm tra session
+
         if (!$session_user_id || $session_user_id != $user_id || !Session::get('otp_verified')) {
             return redirect()->route('forgot-password')->with('error', 'Phiên làm việc không hợp lệ');
         }
@@ -235,7 +235,7 @@ public function login(Request $request)
         $user->password_hash = Hash::make($request->new_password);
         $user->save();
 
-        // Xóa session
+
         Session::forget(['otp_user_id', 'otp_verified', 'latest_otp']);
 
         return redirect('/')->with('success', 'Mật khẩu đã được thay đổi thành công!');
