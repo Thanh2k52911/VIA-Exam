@@ -54,17 +54,17 @@
         }
         button {
             padding: 10px 20px;
-            background: #f4a261; /* Màu cam giống trong ảnh */
+            background: #f4a261;
             border: none;
             color: white;
             font-weight: bold;
             cursor: pointer;
-            border-radius: 20px; /* Bo góc tròn giống nút trong ảnh */
-            width: auto; /* Loại bỏ width: 100% */
-            display: inline-block; /* Đảm bảo nút chỉ rộng đủ chữ */
+            border-radius: 20px;
+            width: auto;
+            display: inline-block;
         }
         button:hover {
-            background: #e07a5f; /* Hiệu ứng hover */
+            background: #e07a5f;
         }
     </style>
 </head>
