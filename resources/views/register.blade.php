@@ -5,7 +5,7 @@
     <title>Đăng ký tài khoản</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- CSS giữ nguyên, không thay đổi -->
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -688,65 +688,65 @@
             const closeBtn = document.querySelector('.success-notification .close-btn');
             const cooperateBtn = document.querySelector('.cooperate-btn');
 
-            // Chỉ hiển thị thông báo thành công nếu đăng ký thành công
+
             @if (session('success') && request()->routeIs('handle.register'))
                 successNotification.classList.add('show');
-                // Tự động ẩn thông báo sau 5 giây, nhưng không chuyển hướng
+
                 setTimeout(() => {
                     successNotification.classList.remove('show');
                 }, 5000);
             @endif
 
-            // Xử lý khi nhấn nút đóng thông báo
+
             if (closeBtn) {
                 closeBtn.addEventListener('click', function() {
                     successNotification.classList.remove('show');
                 });
             }
 
-            // Xử lý khi nhấn nút "Đăng nhập" để chuyển hướng thủ công
+
             if (loginBtn) {
                 loginBtn.addEventListener('click', function() {
                     window.location.href = '{{ route('login') }}';
                 });
             }
 
-            // Xử lý khi nhấn nút "Ký kết hợp đồng"
+
             if (cooperateBtn) {
                 cooperateBtn.addEventListener('click', function() {
                     alert('Chức năng hợp tác đang được phát triển!');
                 });
             }
 
-            // Xử lý các modal liên quan đến quên mật khẩu
+
             function showForgotPassword() {
                 document.getElementById('forgot-password-modal').style.display = 'block';
                 document.getElementById('verify-otp-modal').style.display = 'none';
                 document.getElementById('reset-password-modal').style.display = 'none';
-                successNotification.classList.remove('show'); // Đảm bảo thông báo đăng ký không hiển thị
+                successNotification.classList.remove('show');
             }
 
             function showVerifyOtp() {
                 document.getElementById('forgot-password-modal').style.display = 'none';
                 document.getElementById('verify-otp-modal').style.display = 'block';
                 document.getElementById('reset-password-modal').style.display = 'none';
-                successNotification.classList.remove('show'); // Đảm bảo thông báo đăng ký không hiển thị
-                startTimer(); // Bắt đầu đếm ngược khi modal được mở
+                successNotification.classList.remove('show');
+                startTimer();
             }
 
             function showResetPassword() {
                 document.getElementById('forgot-password-modal').style.display = 'none';
                 document.getElementById('verify-otp-modal').style.display = 'none';
                 document.getElementById('reset-password-modal').style.display = 'block';
-                successNotification.classList.remove('show'); // Đảm bảo thông báo đăng ký không hiển thị
+                successNotification.classList.remove('show');
             }
 
-            // Kiểm tra trạng thái bước (step) để hiển thị modal phù hợp
+
             const step = "{{ session('step') }}";
             if (step === "verify") showVerifyOtp();
             if (step === "reset") showResetPassword();
 
-            // Xử lý toggle hiển thị mật khẩu
+
             function togglePassword(fieldId) {
                 const passwordField = document.getElementById(fieldId);
                 const toggleIcon = passwordField.nextElementSibling;
@@ -759,7 +759,7 @@
                 }
             }
 
-            // Xử lý validate mật khẩu mới
+
             const passwordInput = document.getElementById('new-password');
             const confirmPasswordInput = document.getElementById('confirm-password');
             const passwordError = document.getElementById('password-error');
@@ -797,7 +797,7 @@
                 });
             }
 
-            // Xử lý đếm ngược OTP
+
             let timeLeft = 180;
             let countdownInterval;
             const timerElement = document.getElementById('timer');
@@ -805,8 +805,8 @@
             const inputs = document.querySelectorAll('input[name="otp[]"]');
 
             function startTimer() {
-                clearInterval(countdownInterval); // Xóa interval cũ nếu có
-                timeLeft = 180; // Đặt lại thời gian về 180 giây
+                clearInterval(countdownInterval);
+                timeLeft = 180;
                 updateTimer();
                 countdownInterval = setInterval(updateTimer, 1000);
             }
@@ -818,29 +818,27 @@
                 if (timeLeft <= 0) {
                     clearInterval(countdownInterval);
                     timerElement.textContent = '00:00';
-                    resendBtn.disabled = false; // Kích hoạt nút gửi lại khi hết thời gian
+                    resendBtn.disabled = false;
                 } else {
                     timeLeft--;
-                    resendBtn.disabled = true; // Vô hiệu hóa nút khi còn thời gian
+                    resendBtn.disabled = true;
                 }
             }
 
             if (resendBtn) {
                 resendBtn.addEventListener('click', (e) => {
-                    e.preventDefault(); // Ngăn hành vi mặc định
-                    if (resendBtn.disabled) return; // Thoát nếu nút bị vô hiệu hóa
-
-                    resendBtn.disabled = true; // Vô hiệu hóa nút ngay lập tức
-                    resendBtn.textContent = 'Đang gửi...'; // Cập nhật văn bản nút
-
+                    e.preventDefault();
+                    if (resendBtn.disabled) return;
+                    resendBtn.disabled = true;
+                    resendBtn.textContent = 'Đang gửi...';
                     fetch('{{ route("resend-otp") }}', {
                         method: 'POST',
                         headers: {
                             'X-CSRF-TOKEN': '{{ csrf_token() }}',
                             'Content-Type': 'application/json',
-                            'Accept': 'application/json' // Yêu cầu phản hồi JSON
+                            'Accept': 'application/json'
                         },
-                        credentials: 'same-origin' // Đảm bảo gửi cookie session
+                        credentials: 'same-origin'
                     })
                     .then(response => {
                         if (!response.ok) {
@@ -851,13 +849,12 @@
                     .then(data => {
                         if (data.success) {
                             alert(data.message || 'Mã OTP đã được gửi lại!');
-                            startTimer(); // Bắt đầu lại đếm ngược
-                            // Xóa các ô OTP hiện tại
+                            startTimer();
                             inputs.forEach(input => {
                                 input.value = '';
                                 input.classList.remove('filled');
                             });
-                            inputs[0].focus(); // Focus vào ô OTP đầu tiên
+                            inputs[0].focus();
                         } else {
                             alert(data.error || 'Gửi lại mã thất bại, vui lòng thử lại.');
                         }
@@ -873,8 +870,8 @@
                         alert(errorMessage);
                     })
                     .finally(() => {
-                        resendBtn.disabled = timeLeft > 0; // Chỉ bật nút nếu đếm ngược đã dừng
-                        resendBtn.textContent = 'Gửi lại mã'; // Khôi phục văn bản nút
+                        resendBtn.disabled = timeLeft > 0;
+                        resendBtn.textContent = 'Gửi lại mã';
                     });
                 });
             }
@@ -887,7 +884,7 @@
                 });
             });
 
-            // Gắn sự kiện cho liên kết "Quên mật khẩu"
+
             const forgotPasswordLink = document.querySelector('.forgot-password');
             if (forgotPasswordLink) {
                 forgotPasswordLink.addEventListener('click', showForgotPassword);
