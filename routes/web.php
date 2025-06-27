@@ -2,43 +2,27 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
-/*
-|--------------------------------------------------------------------------
-| Route Trang Chủ
-|--------------------------------------------------------------------------
-*/
+
 Route::get('/', function () {
-    $storeName = session('store_name'); // Lấy từ session
+    $storeName = session('store_name');
     return view('welcome', compact('storeName'));
 })->name('home');
 
-/*
-|--------------------------------------------------------------------------
-| Route Đăng Ký
-|--------------------------------------------------------------------------
-*/
+
 Route::get('/register', function () {
     return view('register');
 })->name('register');
 
 Route::post('/register', [AuthController::class, 'register'])->name('handle.register');
 
-/*
-|--------------------------------------------------------------------------
-| Route Đăng Nhập
-|--------------------------------------------------------------------------
-*/
+
 Route::get('/login', function () {
     return view('login');
 })->name('login');
 
 Route::post('/login', [AuthController::class, 'login'])->name('handle.login');
 
-/*
-|--------------------------------------------------------------------------
-| Route Quên Mật Khẩu và OTP
-|--------------------------------------------------------------------------
-*/
+
 Route::get('/forgot-password', function () {
     return view('forgot_password');
 })->name('forgot-password');
@@ -56,11 +40,7 @@ Route::get('/verify-otp', function () {
 
 Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('handle.verifyOtp');
 
-/*
-|--------------------------------------------------------------------------
-| Route Đặt Lại Mật Khẩu
-|--------------------------------------------------------------------------
-*/
+
 Route::get('/reset-password', function () {
     if (!session('otp_verified')) {
         return redirect()->route('forgot-password');
