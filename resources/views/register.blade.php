@@ -17,7 +17,7 @@
             min-height: 100vh;
         }
 
-        /* Common styles */
+        
         .input-field {
             width: 100%;
             padding: 10px;
@@ -65,7 +65,7 @@
             color: green;
         }
 
-        /* Header */
+        
         .header {
             background-image: url('{{ asset("images/via-character.png") }}');
             background-size: cover;
@@ -155,7 +155,7 @@
             background-size: contain;
         }
 
-        /* Main Content */
+        
         .main-content {
             display: flex;
             flex: 1;
@@ -466,7 +466,7 @@
             color: #000;
         }
 
-        /* Modal */
+        
         .modal {
             display: none;
             position: fixed;
