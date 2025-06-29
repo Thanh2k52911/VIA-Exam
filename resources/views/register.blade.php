@@ -1,11 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký tài khoản</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,6 +17,55 @@
             min-height: 100vh;
         }
 
+        /* Common styles */
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+            height: 40px;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #e76f51;
+            box-shadow: 0 0 5px rgba(231, 111, 81, 0.5);
+        }
+
+        .btn-primary {
+            padding: 12px;
+            background: #f4a261;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: #e76f51;
+        }
+
+        .message {
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 12px;
+        }
+
+        .message.error {
+            color: red;
+        }
+
+        .message.success {
+            color: green;
+        }
+
+        /* Header */
         .header {
             background-image: url('{{ asset("images/via-character.png") }}');
             background-size: cover;
@@ -29,7 +78,6 @@
             justify-content: flex-end;
             padding: 20px;
             width: 100%;
-            min-width: 1200px;
         }
 
         .header .login-section {
@@ -40,7 +88,6 @@
             max-width: 600px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
             color: #333;
-            height: auto;
             position: relative;
         }
 
@@ -79,26 +126,16 @@
             min-height: 60px;
         }
 
-        .header .login-section input {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-            color: #333;
-            width: 100%;
-            height: 40px;
-        }
-
         .header .login-section .password-toggle {
             flex: 1;
             position: relative;
         }
 
-        .header .login-section .password-toggle input {
+        .header .login-section .password-toggle .input-field {
             padding-right: 40px;
         }
 
-        .header .login-section .toggle-icon {
+        .toggle-icon {
             position: absolute;
             right: 10px;
             top: 50%;
@@ -106,38 +143,6 @@
             cursor: pointer;
             font-size: 14px;
             color: #000;
-        }
-
-        .header .login-section button {
-            flex: 0 0 120px;
-            padding: 12px;
-            background: #f4a261;
-            border: none;
-            color: white;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            height: 40px;
-            margin: 0;
-        }
-
-        .header .login-section button:hover {
-            background: #e76f51;
-        }
-
-        .header .login-section .message {
-            margin-bottom: 8px;
-            font-size: 12px;
-            text-align: center;
-        }
-
-        .header .login-section .message.error {
-            color: red;
-        }
-
-        .header .login-section .message.success {
-            color: green;
         }
 
         .header .wave {
@@ -150,6 +155,7 @@
             background-size: contain;
         }
 
+        /* Main Content */
         .main-content {
             display: flex;
             flex: 1;
@@ -157,7 +163,6 @@
             justify-content: space-between;
             align-items: stretch;
             width: 100%;
-            max-width: none;
         }
 
         .register-form {
@@ -183,7 +188,7 @@
             display: block;
         }
 
-        .register-form input, .register-form select {
+        .register-form select {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -193,7 +198,7 @@
             height: 40px;
         }
 
-        .register-form input:focus, .register-form select:focus {
+        .register-form select:focus {
             outline: none;
             border-color: #e76f51;
             box-shadow: 0 0 5px rgba(231, 111, 81, 0.5);
@@ -220,36 +225,7 @@
             text-decoration: underline;
         }
 
-        .register-form button {
-            width: 100%;
-            padding: 12px;
-            background: #f4a261;
-            border: none;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .register-form button:hover {
-            background: #e76f51;
-        }
-
-        .message {
-            text-align: center;
-            margin-bottom: 15px;
-            padding: 10px;
-        }
-
-        .success {
-            color: green;
-        }
-
-        .error {
-            color: red;
-        }
-
+        
         .services {
             flex: 1;
             max-width: 50%;
@@ -311,16 +287,20 @@
             justify-content: center;
         }
 
+        
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
         .footer {
             background: #d4a017;
             padding: 20px;
             text-align: center;
             color: white;
             margin-top: auto;
-        }
-
-        .footer .contact {
-            font-size: 14px;
         }
 
         .footer .contact a {
@@ -343,6 +323,7 @@
             max-height: 80px;
         }
 
+        
         .brand-icons-section {
             padding: 20px;
             text-align: center;
@@ -383,6 +364,7 @@
         .brand-icon.tgdd i { border: 2px solid #fdd835; border-radius: 50%; padding: 8px; }
         .brand-icon.upos { color: #006c8c; }
 
+        
         .success-notification {
             position: fixed;
             top: 50%;
@@ -484,6 +466,7 @@
             color: #000;
         }
 
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -529,7 +512,7 @@
             margin-bottom: 15px;
         }
 
-        #reset-password-modal .toggle-password {
+        .toggle-password {
             position: absolute;
             right: 15px;
             top: 50%;
@@ -588,23 +571,6 @@
             color: #666;
             margin-bottom: 15px;
             text-align: left;
-        }
-
-        .modal button {
-            width: 100%;
-            padding: 12px;
-            background: #f4a261;
-            border: none;
-            color: #fff;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s;
-        }
-
-        .modal button:hover {
-            background: #e76f51;
         }
 
         .modal .close-btn {
@@ -679,87 +645,351 @@
         .button-group .submit-btn:hover {
             background: #e76f51;
         }
+
+        
+        @media (max-width: 768px) {
+            .header {
+                height: 250px;
+                padding: 10px;
+            }
+            .main-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .register-form, .services {
+                max-width: 100%;
+            }
+            .footer .flex-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+        }
     </style>
+</head>
+<body>
+    <div class="header">
+        <h4 class="login-title">ĐĂNG NHẬP NGAY</h4>
+        <div class="login-section">
+            @if(session('error'))
+                <div class="message error login-message">{{ session('error') }}</div>
+            @endif
+            @if(session('success') && request()->routeIs('handle.login'))
+                <div class="message success login-message">{{ session('success') }}</div>
+            @endif
+            <form action="{{ route('handle.login') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <div style="flex: 1;">
+                        <label>Số điện thoại hoặc Email</label>
+                        <input type="text" name="login" class="input-field" placeholder="Nhập số điện thoại hoặc email..." required>
+                    </div>
+                    <div class="password-toggle" style="flex: 1;">
+                        <label>Mật khẩu</label>
+                        <input type="password" name="password" id="login-password" class="input-field" placeholder="Nhập mật khẩu..." required>
+                        <span class="toggle-icon" tabindex="0" role="button" aria-label="Hiện/Ẩn mật khẩu">👁</span>
+                    </div>
+                    <div style="flex: 0 0 120px;">
+                        <button type="submit" class="btn-primary">Đăng nhập</button>
+                    </div>
+                </div>
+            </form>
+            <a href="javascript:void(0);" class="forgot-password">Quên mật khẩu?</a>
+        </div>
+        <div class="wave"></div>
+    </div>
+
+    <div id="forgot-password-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" aria-label="Đóng modal">×</button>
+            <h2>YÊU CẦU THAY ĐỔI MẬT KHẨU</h2>
+            @if(session('success') && request()->routeIs('handle.sendOtp'))
+                <div class="message success">{{ session('success') }}</div>
+            @endif
+            @if(session('error') && request()->routeIs('handle.sendOtp'))
+                <div class="message error">{{ session('error') }}</div>
+            @endif
+            <form action="{{ route('handle.sendOtp') }}" method="POST">
+                @csrf
+                <label>Email/ Số điện thoại</label>
+                <input type="text" name="login" class="input-field" required>
+                <div class="info-text">Bạn vui lòng kiểm tra hòm thư đến hoặc mục tin nhắn trên điện thoại để lấy mã OTP</div>
+                <button type="submit" class="btn-primary">Gửi yêu cầu</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="verify-otp-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" aria-label="Đóng modal">×</button>
+            <h2>THIẾT LẬP MẬT KHẨU MỚI</h2>
+            <button type="button" id="resend-btn" class="btn-primary">Không nhận được mã OTP. Gửi lại mã</button>
+            <div id="countdown">Thời gian còn lại: <span id="timer">03:00</span></div>
+            <form method="POST" action="{{ route('handle.verifyOtp') }}">
+                @csrf
+                <div class="otp-group">
+                    @for($i = 0; $i < 6; $i++)
+                        <input type="text" name="otp[]" maxlength="1" required>
+                    @endfor
+                </div>
+                <input type="hidden" name="user_id" value="{{ session('otp_user_id') }}">
+                <div class="button-group">
+                    <a href="{{ route('forgot-password') }}" class="back-btn">Trở về</a>
+                    <button type="submit" class="submit-btn">Khôi phục mật khẩu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="reset-password-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" aria-label="Đóng modal">×</button>
+            <h2>THIẾT LẬP MẬT KHẨU MỚI</h2>
+            <form action="{{ route('handle.resetPassword') }}" method="POST">
+                @csrf
+                <label>Mật khẩu mới</label>
+                <div class="password-container">
+                    <input type="password" name="new_password" id="new-password" class="input-field" required>
+                    <span class="toggle-password" tabindex="0" role="button" aria-label="Hiện/Ẩn mật khẩu mới">👁️</span>
+                </div>
+                <div class="error-message" id="password-error"></div>
+                <label>Xác nhận mật khẩu mới</label>
+                <div class="password-container">
+                    <input type="password" name="confirm_password" id="confirm-password" class="input-field" required>
+                    <span class="toggle-password" tabindex="0" role="button" aria-label="Hiện/Ẩn xác nhận mật khẩu">👁️</span>
+                </div>
+                <div class="error-message" id="confirm-password-error"></div>
+                <input type="hidden" name="user_id" value="{{ session('otp_user_id') }}">
+                <button type="submit" class="btn-primary">Đăng nhập</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="register-form">
+            <h2>ĐĂNG KÝ TÀI KHOẢN</h2>
+            @if(session('success') && request()->routeIs('handle.register'))
+                <div class="message success register-message">{{ session('success') }}</div>
+            @endif
+            @if($errors->any())
+                <div class="message error register-message">
+                    <ul>
+                        @foreach($errors->all() as $err)
+                            <li>{{ $err }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <form action="{{ route('handle.register') }}" method="POST">
+                @csrf
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; gap: 10px;">
+                        <div style="flex: 1;">
+                            <label>Tên cửa hàng *</label>
+                            <input type="text" name="store_name" class="input-field" required>
+                        </div>
+                        <div style="flex: 1;">
+                            <label>Số điện thoại *</label>
+                            <input type="text" name="phone" id="phone" class="input-field" required>
+                        </div>
+                        <div style="flex: 1;">
+                            <label>Email</label>
+                            <input type="email" name="email" class="input-field" required>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <div style="flex: 1; position: relative;">
+                            <label>Mật khẩu *</label>
+                            <input type="password" name="password" id="register-password" class="input-field" placeholder="Nhập mật khẩu..." required>
+                            <span class="toggle-icon" tabindex="0" role="button" aria-label="Hiện/Ẩn mật khẩu">👁</span>
+                        </div>
+                        <div style="flex: 1; position: relative;">
+                            <label>Xác nhận mật khẩu *</label>
+                            <input type="password" name="password_confirmation" id="register-password-confirm" class="input-field" placeholder="Nhập lại mật khẩu..." required>
+                            <span class="toggle-icon" tabindex="0" role="button" aria-label="Hiện/Ẩn xác nhận mật khẩu">👁</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Địa chỉ</label>
+                        <input type="text" name="address" class="input-field" placeholder="Nhập địa chỉ...">
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <div style="flex: 1;">
+                            <label>Thành phố / Tỉnh *</label>
+                            <select name="city" id="city" required></select>
+                        </div>
+                        <div style="flex: 1;">
+                            <label>Quận / Huyện *</label>
+                            <select name="district" id="district" required disabled></select>
+                        </div>
+                        <div style="flex: 1;">
+                            <label>Phường / Xã *</label>
+                            <select name="ward" id="ward" required disabled></select>
+                        </div>
+                    </div>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="agreed_policy" required>
+                        Tôi đã đọc và đồng ý với <a href="#">chính sách bảo mật thông tin</a>
+                    </label>
+                    <button type="submit" class="btn-primary">Đăng ký ngay</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="services">
+            <h3>DỊCH VỤ CỦA CHÚNG TÔI</h3>
+            <div class="service-grid">
+                <div class="service-row">
+                    <div class="service-item">
+                        <img src="{{ asset('images/via-express.png') }}" alt="VIA Express">
+                        <a href="#">VIA Express</a>
+                    </div>
+                    <div class="service-item">
+                        <img src="{{ asset('images/via-fast.png') }}" alt="VIA Fast">
+                        <a href="#">VIA Fast</a>
+                    </div>
+                </div>
+                <div class="service-row">
+                    <div class="service-item">
+                        <img src="{{ asset('images/via-super.png') }}" alt="VIA Super">
+                        <a href="#">VIA Super</a>
+                    </div>
+                    <div class="service-item">
+                        <img src="{{ asset('images/via-fresh.png') }}" alt="VIA Fresh">
+                        <a href="#">VIA Fresh</a>
+                    </div>
+                </div>
+                <div class="service-center">
+                    <div class="service-item">
+                        <img src="{{ asset('images/via-international.png') }}" alt="VIA International">
+                        <a href="#">VIA International</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="successNotification" class="success-notification">
+        <span class="close-btn" aria-label="Đóng thông báo">×</span>
+        <i class="fas fa-shield-check check-icon"></i>
+        <h3>ĐĂNG KÝ THÀNH CÔNG</h3>
+        <p>Đề nghị dùng dịch vụ với chúng tôi, bạn có muốn Ký kết hợp đồng điện tử ngay?</p>
+        <div class="buttons">
+            <button class="login-btn">Đăng nhập</button>
+            <button class="cooperate-btn">Ký kết hợp đồng</button>
+        </div>
+    </div>
+
+    <div class="brand-icons-section">
+        <h3>KHÁCH HÀNG TIÊU BIỂU</h3>
+        <div class="brand-icons">
+            <span class="brand-icon tiktok"><i class="fab fa-tiktok"></i> TikTok</span>
+            <span class="brand-icon shopee"><i class="fas fa-store"></i> Shopee</span>
+            <span class="brand-icon oppo"><i class="fas fa-mobile-alt"></i> OPPO</span>
+            <span class="brand-icon tiki"><i class="fas fa-envelope-open-text"></i> Tiki.vn</span>
+            <span class="brand-icon upos"><i class="fas fa-cash-register"></i> UPOS</span>
+            <span class="brand-icon tgdd"><i class="fas fa-running"></i> Thegioididong</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="flex-container">
+            <div class="footer-left">
+                <img src="{{ asset('images/via-logo.png') }}" alt="VIA Logo" style="max-height: 50px; margin-bottom: 10px;">
+                <p style="margin: 5px 0; font-size: 16px;">CÔNG TY CỔ PHẦN VIA PHÁT TRIỂN</p>
+                <p style="margin: 5px 0; font-size: 14px;">Ứng dụng thông minh VIA</p>
+                <p style="margin: 5px 0; font-size: 14px;">Mã số thuế: 0106944214</p>
+                <p style="margin: 5px 0; font-size: 14px;">Ngày hoạt động: 07/03/2014</p>
+                <p style="margin: 5px 0; font-size: 14px;">Số 6 Tố Hữu, Trung Văn, Nam Từ Liêm, Hà Nội</p>
+                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+                    <i class="fab fa-facebook-f" style="font-size: 18px;"></i>
+                    <i class="fab fa-youtube" style="font-size: 18px;"></i>
+                    <i class="fab fa-instagram" style="font-size: 18px;"></i>
+                </div>
+            </div>
+            <div class="footer-center">
+                <p style="margin: 5px 0; font-size: 20px; font-weight: bold;">LIÊN HỆ</p>
+                <p class="contact" style="margin: 5px 0; font-size: 16px;">Email: <a href="mailto:support@via.com">support@via.com</a></p>
+                <p style="margin: 5px 0; font-size: 16px;">Hotline: 1900 1234</p>
+                <p style="margin: 5px 0; font-size: 16px;">16 Ngõ 204, Trần Duy Hưng, Trung Hòa, Cầu Giấy, HN</p>
+                <img src="{{ asset('images/bocongthuong.png') }}" alt="Bộ Công Thương" style="max-height: 40px; margin-top: 10px; display: block; margin-left: auto; margin-right: auto;">
+            </div>
+            <div class="footer-right">
+                <p style="margin: 5px 0; font-size: 20px; font-weight: bold;">TẢI ỨNG DỤNG</p>
+                <div class="qrcode">
+                    <img src="{{ asset('images/qrcode.png') }}" alt="QR Code">
+                    <div style="display: flex; flex-direction: column; justify-content: center;">
+                        <a href="#" style="display: inline-block; margin-top: 5px;">
+                            <img src="{{ asset('images/appstore.png') }}" alt="App Store" style="max-height: 30px;">
+                        </a>
+                        <a href="#" style="display: inline-block; margin-top: 5px;">
+                            <img src="{{ asset('images/googleplay.png') }}" alt="Google Play" style="max-height: 30px;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom" style="width: 100%; text-align: center; margin-top: 20px; font-size: 14px;">
+            <p>CHÍNH SÁCH BẢO MẬT</p>
+            <p>Copyright © 2025 VIA JSC. All rights reserved.</p>
+        </div>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const showModal = (modalId) => {
+                document.querySelectorAll('.modal').forEach(modal => modal.style.display = 'none');
+                document.getElementById('successNotification').classList.remove('show');
+                if (modalId) document.getElementById(modalId).style.display = 'block';
+            };
+
+            
             const successNotification = document.getElementById('successNotification');
-            const loginBtn = document.querySelector('.login-btn');
-            const closeBtn = document.querySelector('.success-notification .close-btn');
-            const cooperateBtn = document.querySelector('.cooperate-btn');
-
-
             @if (session('success') && request()->routeIs('handle.register'))
                 successNotification.classList.add('show');
-
-                setTimeout(() => {
-                    successNotification.classList.remove('show');
-                }, 5000);
+                setTimeout(() => successNotification.classList.remove('show'), 5000);
             @endif
 
-
-            if (closeBtn) {
-                closeBtn.addEventListener('click', function() {
-                    successNotification.classList.remove('show');
-                });
-            }
-
-
-            if (loginBtn) {
-                loginBtn.addEventListener('click', function() {
-                    window.location.href = '{{ route('login') }}';
-                });
-            }
-
-
-            if (cooperateBtn) {
-                cooperateBtn.addEventListener('click', function() {
-                    alert('Chức năng hợp tác đang được phát triển!');
-                });
-            }
-
-
-            function showForgotPassword() {
-                document.getElementById('forgot-password-modal').style.display = 'block';
-                document.getElementById('verify-otp-modal').style.display = 'none';
-                document.getElementById('reset-password-modal').style.display = 'none';
+            document.querySelector('.success-notification .close-btn')?.addEventListener('click', () => {
                 successNotification.classList.remove('show');
-            }
+            });
 
-            function showVerifyOtp() {
-                document.getElementById('forgot-password-modal').style.display = 'none';
-                document.getElementById('verify-otp-modal').style.display = 'block';
-                document.getElementById('reset-password-modal').style.display = 'none';
-                successNotification.classList.remove('show');
-                startTimer();
-            }
+            document.querySelector('.login-btn')?.addEventListener('click', () => {
+                window.location.href = '{{ route('login') }}';
+            });
 
-            function showResetPassword() {
-                document.getElementById('forgot-password-modal').style.display = 'none';
-                document.getElementById('verify-otp-modal').style.display = 'none';
-                document.getElementById('reset-password-modal').style.display = 'block';
-                successNotification.classList.remove('show');
-            }
+            document.querySelector('.cooperate-btn')?.addEventListener('click', () => {
+                alert('Chức năng hợp tác đang được phát triển!');
+            });
 
+            
+            document.querySelector('.forgot-password')?.addEventListener('click', () => showModal('forgot-password-modal'));
 
-            const step = "{{ session('step') }}";
-            if (step === "verify") showVerifyOtp();
-            if (step === "reset") showResetPassword();
+            
+            document.querySelectorAll('.modal .close-btn').forEach(btn => {
+                btn.addEventListener('click', () => showModal(null));
+                btn.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') showModal(null);
+                });
+            });
 
+            
+            const togglePassword = (element) => {
+                const passwordField = element.previousElementSibling;
+                const isPassword = passwordField.type === 'password';
+                passwordField.type = isPassword ? 'text' : 'password';
+                element.textContent = isPassword ? '👁️‍🗨️' : '👁';
+            };
 
-            function togglePassword(fieldId) {
-                const passwordField = document.getElementById(fieldId);
-                const toggleIcon = passwordField.nextElementSibling;
-                if (passwordField.type === "password") {
-                    passwordField.type = "text";
-                    toggleIcon.textContent = "👁️‍🗨️";
-                } else {
-                    passwordField.type = "password";
-                    toggleIcon.textContent = "👁️";
-                }
-            }
+            document.querySelectorAll('.toggle-icon, .toggle-password').forEach(icon => {
+                icon.addEventListener('click', () => togglePassword(icon));
+                icon.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') togglePassword(icon);
+                });
+            });
 
-
+            
             const passwordInput = document.getElementById('new-password');
             const confirmPasswordInput = document.getElementById('confirm-password');
             const passwordError = document.getElementById('password-error');
@@ -797,21 +1027,35 @@
                 });
             }
 
+            
+            const phoneInput = document.getElementById('phone');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', () => {
+                    const phoneRegex = /^(0[3|5|7|8|9])+([0-9]{8})$/;
+                    if (!phoneRegex.test(phoneInput.value)) {
+                        phoneInput.setCustomValidity('Vui lòng nhập số điện thoại Việt Nam hợp lệ.');
+                    } else {
+                        phoneInput.setCustomValidity('');
+                    }
+                });
+            }
 
+            
+            const otpInputs = document.querySelectorAll('input[name="otp[]"]');
+            let isResending = false;
+            const resendBtn = document.getElementById('resend-btn');
+            const timerElement = document.getElementById('timer');
             let timeLeft = 180;
             let countdownInterval;
-            const timerElement = document.getElementById('timer');
-            const resendBtn = document.getElementById('resend-btn');
-            const inputs = document.querySelectorAll('input[name="otp[]"]');
 
-            function startTimer() {
+            const startTimer = () => {
                 clearInterval(countdownInterval);
                 timeLeft = 180;
                 updateTimer();
                 countdownInterval = setInterval(updateTimer, 1000);
-            }
+            };
 
-            function updateTimer() {
+            const updateTimer = () => {
                 const minutes = Math.floor(timeLeft / 60);
                 const seconds = timeLeft % 60;
                 timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
@@ -823,12 +1067,13 @@
                     timeLeft--;
                     resendBtn.disabled = true;
                 }
-            }
+            };
 
             if (resendBtn) {
                 resendBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    if (resendBtn.disabled) return;
+                    if (resendBtn.disabled || isResending) return;
+                    isResending = true;
                     resendBtn.disabled = true;
                     resendBtn.textContent = 'Đang gửi...';
                     fetch('{{ route("resend-otp") }}', {
@@ -850,11 +1095,11 @@
                         if (data.success) {
                             alert(data.message || 'Mã OTP đã được gửi lại!');
                             startTimer();
-                            inputs.forEach(input => {
+                            otpInputs.forEach(input => {
                                 input.value = '';
                                 input.classList.remove('filled');
                             });
-                            inputs[0].focus();
+                            otpInputs[0].focus();
                         } else {
                             alert(data.error || 'Gửi lại mã thất bại, vui lòng thử lại.');
                         }
@@ -870,310 +1115,88 @@
                         alert(errorMessage);
                     })
                     .finally(() => {
+                        isResending = false;
                         resendBtn.disabled = timeLeft > 0;
                         resendBtn.textContent = 'Gửi lại mã';
                     });
                 });
             }
 
-            inputs.forEach((input, i) => {
+            otpInputs.forEach((input, i) => {
                 input.addEventListener('input', () => {
-                    if (input.value.length > 0 && i < inputs.length - 1) inputs[i + 1].focus();
+                    if (input.value.length > 0 && i < otpInputs.length - 1) otpInputs[i + 1].focus();
                     if (input.value) input.classList.add('filled');
                     else input.classList.remove('filled');
                 });
+                input.addEventListener('paste', (e) => {
+                    const paste = (e.clipboardData || window.clipboardData).getData('text');
+                    if (paste.length === otpInputs.length) {
+                        paste.split('').forEach((char, j) => {
+                            otpInputs[j].value = char;
+                            otpInputs[j].classList.add('filled');
+                        });
+                        otpInputs[otpInputs.length - 1].focus();
+                        e.preventDefault();
+                    }
+                });
             });
 
+            
+            const citySelect = document.getElementById('city');
+            const districtSelect = document.getElementById('district');
+            const wardSelect = document.getElementById('ward');
+            let vnData = [];
 
-            const forgotPasswordLink = document.querySelector('.forgot-password');
-            if (forgotPasswordLink) {
-                forgotPasswordLink.addEventListener('click', showForgotPassword);
+            const populate = (select, items) => {
+                select.innerHTML = '<option value="">-- Chọn --</option>';
+                items.forEach(name => {
+                    const o = document.createElement('option');
+                    o.value = name;
+                    o.textContent = name;
+                    select.appendChild(o);
+                });
+            };
+
+            fetch('/js/vn-locations.json')
+                .then(r => r.json())
+                .then(data => {
+                    vnData = data;
+                    populate(citySelect, vnData.map(p => p.name));
+                })
+                .catch(err => {
+                    console.error('Không tải được dữ liệu địa phương:', err);
+                    citySelect.innerHTML = '<option value="">Không tải được danh sách tỉnh/thành</option>';
+                    districtSelect.disabled = true;
+                    wardSelect.disabled = true;
+                });
+
+            citySelect.addEventListener('change', () => {
+                const province = vnData.find(p => p.name === citySelect.value);
+                const districts = province ? province.districts.map(d => d.name) : [];
+                populate(districtSelect, districts);
+                districtSelect.disabled = !districts.length;
+                populate(wardSelect, []);
+                wardSelect.disabled = true;
+            });
+
+            districtSelect.addEventListener('change', () => {
+                const province = vnData.find(p => p.name === citySelect.value);
+                const district = province?.districts.find(d => d.name === districtSelect.value);
+                const wards = district ? district.wards.map(w => w.name) : [];
+                populate(wardSelect, wards);
+                wardSelect.disabled = !wards.length;
+            });
+
+            
+            const step = "{{ session('step') }}";
+            if (step === 'verify') {
+                showModal('verify-otp-modal');
+                startTimer();
+            } else if (step === 'reset') {
+                showModal('reset-password-modal');
             }
         });
     </script>
-</head>
-<body>
-    <div class="header">
-        <h4 class="login-title">ĐĂNG NHẬP NGAY</h4>
-        <div class="login-section">
-            @if(session('error'))
-                <div class="message error">{{ session('error') }}</div>
-            @endif
-            @if(session('success') && request()->routeIs('handle.login'))
-                <div class="message success">{{ session('success') }}</div>
-            @endif
-            <form action="{{ route('handle.login') }}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <div style="flex: 1;">
-                        <label style="font-weight: bold; color: #333; margin-bottom: 5px; display: block;">
-                            Số điện thoại hoặc Email
-                        </label>
-                        <input type="text" name="login" placeholder="Nhập số điện thoại hoặc email..."
-                               style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;
-                                      font-size: 14px; box-sizing: border-box; height: 40px;" required>
-                    </div>
-                    <div class="password-toggle" style="flex: 1; position: relative;">
-                        <label style="font-weight: bold; color: #333; margin-bottom: 5px; display: block;">
-                            Mật khẩu
-                        </label>
-                        <input type="password" name="password" placeholder="Nhập mật khẩu..."
-                               style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;
-                                      font-size: 14px; box-sizing: border-box; height: 40px; padding-right: 40px;" required>
-                        <span class="toggle-icon"
-                              onclick="this.previousElementSibling.type = this.previousElementSibling.type === 'password' ? 'text' : 'password';"
-                              style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-                                     cursor: pointer; font-size: 14px; color: #000;">👁</span>
-                    </div>
-                    <div style="flex: 0 0 120px;">
-                        <button type="submit"
-                                style="width: 100%; padding: 12px; background: #f4a261; border: none; color: white;
-                                       font-weight: bold; border-radius: 5px; cursor: pointer; font-size: 16px;
-                                       height: 40px; margin: 0;">
-                            Đăng nhập
-                        </button>
-                    </div>
-                </div>
-            </form>
-            <a href="javascript:void(0);" class="forgot-password"
-               style="display: inline-block; margin-top: 10px; color: #f4a261; cursor: pointer;">
-                Quên mật khẩu?
-            </a>
-        </div>
-        <div class="wave"></div>
-    </div>
-
-    <div id="forgot-password-modal" class="modal">
-        <div class="modal-content">
-            <form action="{{ route('handle.sendOtp') }}" method="POST">
-                @csrf
-                <span class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</span>
-                <h2>YÊU CẦU THAY ĐỔI MẬT KHẨU</h2>
-                @if(session('success') && request()->routeIs('handle.sendOtp'))
-                    <div style="color: green;">{{ session('success') }}</div>
-                @endif
-                @if(session('error') && request()->routeIs('handle.sendOtp'))
-                    <div style="color: red;">{{ session('error') }}</div>
-                @endif
-                <label>Email/ Số điện thoại</label>
-                <input type="text" name="login" required>
-                <div class="info-text">Kiểm tra email hoặc điện thoại để lấy mã OTP</div>
-                <button type="submit">Gửi yêu cầu</button>
-            </form>
-        </div>
-    </div>
-
-    <div id="verify-otp-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</span>
-            <h2>THIẾT LẬP MẬT KHẨU MỚI</h2>
-            <button type="button" id="resend-btn">Không nhận được mã OTP. Gửi lại mã</button>
-            <div id="countdown">Thời gian còn lại: <span id="timer">03:00</span></div>
-            <form method="POST" action="{{ route('handle.verifyOtp') }}">
-                @csrf
-                <div class="otp-group">
-                    @for($i = 0; $i < 6; $i++)
-                        <input type="text" name="otp[]" maxlength="1" required>
-                    @endfor
-                </div>
-                <input type="hidden" name="user_id" value="{{ session('otp_user_id') }}">
-                <div class="button-group">
-                    <a href="{{ route('forgot-password') }}" class="back-btn">Trở về</a>
-                    <button type="submit" class="submit-btn">Khôi phục mật khẩu</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div id="reset-password-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="this.parentElement.parentElement.style.display='none'">×</span>
-            <h2>THIẾT LẬP MẬT KHẨU MỚI</h2>
-            <form action="{{ route('handle.resetPassword') }}" method="POST">
-                @csrf
-                <label>Mật khẩu mới</label>
-                <div class="password-container">
-                    <input type="password" name="new_password" id="new-password" required>
-                    <span class="toggle-password" onclick="togglePassword('new-password')">👁️</span>
-                </div>
-                <div class="error-message" id="password-error"></div>
-                <label>Xác nhận mật khẩu mới</label>
-                <div class="password-container">
-                    <input type="password" name="confirm_password" id="confirm-password" required>
-                    <span class="toggle-password" onclick="togglePassword('confirm-password')">👁️</span>
-                </div>
-                <div class="error-message" id="confirm-password-error"></div>
-                <input type="hidden" name="user_id" value="{{ session('otp_user_id') }}">
-                <button type="submit">Đăng nhập</button>
-            </form>
-        </div>
-    </div>
-
-    <div class="main-content">
-        <div class="register-form">
-            <h2>ĐĂNG KÝ TÀI KHOẢN</h2>
-            @if(session('success') && request()->routeIs('handle.register'))
-                <div class="message success">{{ session('success') }}</div>
-            @endif
-            @if($errors->any())
-                <div class="message error">
-                    <ul>
-                        @foreach($errors->all() as $err)
-                            <li>{{ $err }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            <form action="{{ route('handle.register') }}" method="POST">
-                @csrf
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <div style="display: flex; gap: 10px;">
-                        <div style="flex: 1;">
-                            <label>Tên cửa hàng *</label>
-                            <input type="text" name="store_name" required>
-                        </div>
-                        <div style="flex: 1;">
-                            <label>Số điện thoại *</label>
-                            <input type="text" name="phone" required>
-                        </div>
-                        <div style="flex: 1;">
-                            <label>Email</label>
-                            <input type="email" name="email" required>
-                        </div>
-                    </div>
-                    <div style="display: flex; gap: 10px;">
-                        <div style="flex: 1; position: relative;">
-                            <label>Mật khẩu *</label>
-                            <input type="password" name="password" placeholder="Nhập mật khẩu..." style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; box-sizing: border-box; height: 40px; padding-right: 40px;" required>
-                            <span class="toggle-icon" onclick="this.previousElementSibling.type = this.previousElementSibling.type === 'password' ? 'text' : 'password';" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 14px; color: #000;">👁</span>
-                        </div>
-                        <div style="flex: 1; position: relative;">
-                            <label>Xác nhận mật khẩu *</label>
-                            <input type="password" name="password_confirmation" placeholder="Nhập lại mật khẩu..." style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; box-sizing: border-box; height: 40px; padding-right: 40px;" required>
-                            <span class="toggle-icon" onclick="this.previousElementSibling.type = this.previousElementSibling.type === 'password' ? 'text' : 'password';" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 14px; color: #000;">👁</span>
-                        </div>
-                    </div>
-                    <div>
-                        <label>Địa chỉ</label>
-                        <input type="text" name="address" placeholder="Nhập địa chỉ...">
-                    </div>
-                    <div style="display: flex; gap: 10px;">
-                        <div style="flex: 1;">
-                            <label>Phường/Xã</label>
-                            <input type="text" name="ward">
-                        </div>
-                        <div style="flex: 1;">
-                            <label>Quận/Huyện</label>
-                            <input type="text" name="district">
-                        </div>
-                        <div style="flex: 1;">
-                            <label>Thành phố</label>
-                            <input type="text" name="city">
-                        </div>
-                    </div>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="agreed_policy" required>
-                        Tôi đã đọc và đồng ý với <a href="#" style="color: #f4a261; text-decoration: none;">chính sách bảo mật thông tin</a>
-                    </label>
-                    <button type="submit">Đăng ký ngay</button>
-                </div>
-            </form>
-        </div>
-        <div class="services">
-            <h3>DỊCH VỤ CỦA CHÚNG TÔI</h3>
-            <div class="service-grid">
-                <div class="service-row">
-                    <div class="service-item">
-                        <img src="{{ asset('images/via-express.png') }}" alt="VIA Express">
-                        <a href="#">VIA Express</a>
-                    </div>
-                    <div class="service-item">
-                        <img src="{{ asset('images/via-fast.png') }}" alt="VIA Fast">
-                        <a href="#">VIA Fast</a>
-                    </div>
-                </div>
-                <div class="service-row">
-                    <div class="service-item">
-                        <img src="{{ asset('images/via-super.png') }}" alt="VIA Super">
-                        <a href="#">VIA Super</a>
-                    </div>
-                    <div class="service-item">
-                        <img src="{{ asset('images/via-fresh.png') }}" alt="VIA Fresh">
-                        <a href="#">VIA Fresh</a>
-                    </div>
-                </div>
-                <div class="service-center">
-                    <div class="service-item">
-                        <img src="{{ asset('images/via-international.png') }}" alt="VIA International">
-                        <a href="#">VIA International</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="successNotification" class="success-notification">
-        <span class="close-btn">×</span>
-        <i class="fas fa-shield-check check-icon"></i>
-        <h3>ĐĂNG KÝ THÀNH CÔNG</h3>
-        <p>Đề nghị dùng dịch vụ với chúng tôi, bạn có muốn Ký kết hợp đồng điện tử ngay?</p>
-        <div class="buttons">
-            <button class="login-btn">Đăng nhập</button>
-            <button class="cooperate-btn">Ký kết hợp đồng</button>
-        </div>
-    </div>
-
-    <div class="brand-icons-section">
-        <h3 style="text-align: center; color: #333; margin-bottom: 20px;">KHÁCH HÀNG TIÊU BIỂU</h3>
-        <div class="brand-icons">
-            <span class="brand-icon tiktok"><i class="fab fa-tiktok"></i> TikTok</span>
-            <span class="brand-icon shopee"><i class="fas fa-store"></i> Shopee</span>
-            <span class="brand-icon oppo"><i class="fas fa-mobile-alt"></i> OPPO</span>
-            <span class="brand-icon tiki"><i class="fas fa-envelope-open-text"></i> Tiki.vn</span>
-            <span class="brand-icon upos"><i class="fas fa-cash-register"></i> UPOS</span>
-            <span class="brand-icon tgdd"><i class="fas fa-running"></i> Thegioididong</span>
-        </div>
-    </div>
-
-    <div class="footer" style="background-color: #d4a017; padding: 20px; color: white; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; font-family: Arial, sans-serif;">
-        <div class="footer-left" style="flex: 1; display: flex; flex-direction: column; align-items: center;">
-            <img src="{{ asset('images/via-logo.png') }}" alt="VIA Logo" style="max-height: 50px; margin-bottom: 10px;">
-            <p style="margin: 5px 0; font-size: 16px;">CÔNG TY CỔ PHẦN VIA PHÁT TRIỂN</p>
-            <p style="margin: 5px 0; font-size: 14px;">Ứng dụng thông minh VIA</p>
-            <p style="margin: 5px 0; font-size: 14px;">Mã số thuế: 0106944214</p>
-            <p style="margin: 5px 0; font-size: 14px;">Ngày hoạt động: 07/03/2014</p>
-            <p style="margin: 5px 0; font-size: 14px;">Số 6 Tố Hữu, Trung Văn, Nam Từ Liêm, Hà Nội</p>
-            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
-                <i class="fab fa-facebook-f" style="font-size: 18px;"></i>
-                <i class="fab fa-youtube" style="font-size: 18px;"></i>
-                <i class="fab fa-instagram" style="font-size: 18px;"></i>
-            </div>
-        </div>
-        <div class="footer-center" style="flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center;">
-            <p style="margin: 5px 0; font-size: 20px; font-weight: bold;">LIÊN HỆ</p>
-            <p style="margin: 5px 0; font-size: 16px;">Email: <a href="mailto:support@via.com" style="color: white; text-decoration: none;">support@via.com</a></p>
-            <p style="margin: 5px 0; font-size: 16px;">Hotline: 1900 1234</p>
-            <p style="margin: 5px 0; font-size: 16px;">16 Ngõ 204, Trần Duy Hưng, Trung Hòa, Cầu Giấy, HN</p>
-            <img src="{{ asset('images/bocongthuong.png') }}" alt="Small Image" style="max-height: 40px; margin-top: 10px; display: block; margin-left: auto; margin-right: auto;">
-        </div>
-        <div class="footer-right" style="flex: 1; display: flex; flex-direction: column; align-items: center;">
-            <p style="margin: 5px 0; font-size: 20px; font-weight: bold;">TẢI ỨNG DỤNG</p>
-            <div style="display: flex; gap: 10px; margin-top: 10px;">
-                <img src="{{ asset('images/qrcode.png') }}" alt="QR Code" style="max-height: 80px;">
-                <div style="display: flex; flex-direction: column; justify-content: center;">
-                    <a href="#" style="display: inline-block; margin-top: 5px;">
-                        <img src="{{ asset('images/appstore.png') }}" alt="App Store" style="max-height: 30px;">
-                    </a>
-                    <a href="#" style="display: inline-block; margin-top: 5px;">
-                        <img src="{{ asset('images/googleplay.png') }}" alt="Google Play" style="max-height: 30px;">
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom" style="width: 100%; text-align: center; margin-top: 20px; font-size: 14px;">
-            <p>CHÍNH SÁCH BẢO MẬT</p>
-            <p>Copyright © 2025 VIA JSC. All rights reserved.</p>
-        </div>
-    </div>
 </body>
 </html>
+
