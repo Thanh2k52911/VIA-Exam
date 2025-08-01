@@ -14,7 +14,7 @@ class OtpRequestFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(), // sẽ tự tạo user nếu chưa có
+            'user_id' => User::factory(),
             'otp_code' => $this->faker->numerify('######'),
             'is_used' => false,
             'expires_at' => Carbon::now()->addMinutes(10),

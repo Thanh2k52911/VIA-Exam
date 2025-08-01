@@ -34,7 +34,7 @@ class User extends Authenticatable
         'updated_at' => 'datetime',
     ];
 
-    // Mutator: Cho phép dùng $user->password để gán password_hash
+
     protected function password(): Attribute
     {
         return Attribute::make(

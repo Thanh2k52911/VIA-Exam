@@ -149,8 +149,8 @@
     </div>
 
     <script>
-        // Countdown timer
-        let timeLeft = 180; // 3 phút (180 giây)
+
+        let timeLeft = 180;
         const timerElement = document.getElementById('timer');
         const resendBtn = document.getElementById('resend-btn');
         const inputs = document.querySelectorAll('input[name="otp[]"]');
@@ -164,10 +164,10 @@
 
             if (timeLeft < 0) {
                 timerElement.textContent = '00:00';
-                clearInterval(countdownInterval); // Dừng đếm ngược khi hết giờ
+                clearInterval(countdownInterval);
             }
 
-            // Kiểm tra thời gian 60 giây trước khi cho phép gửi lại
+
             if (lastResendTime) {
                 const timeSinceLastResend = Math.floor((Date.now() - lastResendTime) / 1000);
                 if (timeSinceLastResend < 60) {
@@ -182,14 +182,14 @@
 
         const countdownInterval = setInterval(updateTimer, 1000);
 
-        // Resend OTP
+
         resendBtn.addEventListener('click', (e) => {
             if (resendBtn.disabled) {
                 e.preventDefault();
                 return;
             }
 
-            // Vô hiệu hóa nút trong khi gửi yêu cầu
+
             resendBtn.disabled = true;
             resendBtn.setAttribute('disabled', 'disabled');
 
@@ -209,11 +209,11 @@
             .then(data => {
                 if (data.success) {
                     alert(data.message);
-                    timeLeft = 180; // Reset thời gian đếm ngược về 3 phút
+                    timeLeft = 180;
                     timerElement.textContent = '03:00';
-                    clearInterval(countdownInterval); // Xóa interval cũ
-                    countdownInterval = setInterval(updateTimer, 1000); // Bắt đầu lại đếm ngược
-                    lastResendTime = Date.now(); // Cập nhật thời gian gửi lại mã
+                    clearInterval(countdownInterval);
+                    countdownInterval = setInterval(updateTimer, 1000);
+                    lastResendTime = Date.now();
                 } else {
                     alert(data.error);
                 }
@@ -223,13 +223,13 @@
                 alert('Đã có lỗi xảy ra, vui lòng thử lại: ' + error.message);
             })
             .finally(() => {
-                // Kích hoạt lại nút sau khi hoàn tất
+
                 resendBtn.disabled = false;
                 resendBtn.removeAttribute('disabled');
             });
         });
 
-        // Tự động chuyển ô nhập OTP
+
         inputs.forEach((input, i) => {
             input.addEventListener('input', () => {
                 if (input.value.length > 0 && i < inputs.length - 1) {

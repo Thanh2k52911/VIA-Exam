@@ -16,7 +16,7 @@ class UserFactory extends Factory
             'store_name' => $this->faker->company,
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->unique()->numerify('09########'),
-            'password' => 'Test@1234', // dùng mutator để set password_hash
+            'password' => 'Test@1234',
             'ward' => $this->faker->streetName,
             'district' => $this->faker->citySuffix,
             'city' => $this->faker->city,

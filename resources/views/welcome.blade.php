@@ -86,7 +86,7 @@
     background: #e76f51;
 }
 
-/* Đưa tiêu đề tìm kiếm ra ngoài form */
+
 .header .search-section h4 {
     color: #2e0505;
     font-size: 18px;
@@ -97,10 +97,10 @@
     left: 0;
 }
 
-/* USER SECTION sửa lại toàn bộ */
+
 .header .user-section {
     position: absolute;
-    top: 40px; /* Ngang dòng “TÌM KIẾM NỘI DUNG” */
+    top: 40px;
     right: 20px;
     display: flex;
     flex-direction: column;
@@ -146,7 +146,7 @@
     background: #e76f51;
 }
 
-/* Sóng vàng trang trí */
+
 .header .wave {
     position: absolute;
     bottom: -10px;
@@ -157,7 +157,7 @@
     background-size: contain;
 }
 
-        /* Rest of the styles remain the same as previous code */
+
         .main-content {
             display: flex;
             flex: 1;
